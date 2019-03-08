@@ -6,18 +6,66 @@ import java.util.ArrayList;
 
 public class BoggleSolver
 {
+	private TrieST<Integer> save;
     public BoggleSolver(String[] dictionary)
     {
+    	 this.save= new TrieST<Integer>();
+    	 for(int i=0; i<dictionary.length; i++)
+    	 {
+    		 int score=0;
+    		 int length=dictionary[i].length();
+    		 if(length>2&&length<5)
+    		 {
+    			score=1;
+    		 }
+    		 else if(length==5)
+    		 {
+    			 score=2;
+    		 }
+    		 else if(length==6)
+    		 {
+    			 score=3;
+    		 }
+    		 else if(length==7)
+    		 {
+    			 score=5;
+    		 }
+    		 else if(length>7)
+    		 {
+    			 score=11;
+    		 }
+    		 
+    		 save.put(dictionary[i], score);
+    	 }
+    	 
     }
 
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
-        throw new UnsupportedOperationException();
+       throw new java.lang.UnsupportedOperationException();
     }
 
     public int scoreOf(String word)
     {
-        throw new UnsupportedOperationException();
+		 int length=word.length();
+		 if(length>2&&length<5)
+		 {
+			return 1;
+		 }
+		 else if(length==5)
+		 {
+			 return 2;
+		 }
+		 else if(length==6)
+		 {
+			 return 3;
+		 }
+		 else if(length==7)
+		 {
+			 return 5;
+		 }
+		 return 11;
+		 
     }
     
     // ------------------------
