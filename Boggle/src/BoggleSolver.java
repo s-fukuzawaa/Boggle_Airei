@@ -43,10 +43,31 @@ public class BoggleSolver
     	 }
     	 
     }
+    
+    private boolean valid(String a)
+    {
+    	return save.contains(a);
+    }
 
+    private void add(Stack<String> result, char s)
+    {
+    	if(valid(s))
+    	{
+    		
+    	}
+    }
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
-       throw new java.lang.UnsupportedOperationException();
+       Stack<String> result= new Stack<String>();
+       
+       for(int i=0; i<board.rows(); i++)
+       {
+    	   for(int j=0; j<board.cols(); j++)
+    	   {
+    		   add(result,board.getLetter(i, j));
+    	   }
+       }
+       return result;
     }
 
     public int scoreOf(String word)
