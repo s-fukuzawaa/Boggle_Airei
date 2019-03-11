@@ -14,6 +14,10 @@ public class BoggleSolver
     	 {
     		 int score=0;
     		 int length=dictionary[i].length();
+    		 if(length<3)
+    		 {
+    			 score=0;
+    		 }
     		 if(length>2&&length<5)
     		 {
     			score=1;
@@ -48,6 +52,10 @@ public class BoggleSolver
     public int scoreOf(String word)
     {
 		 int length=word.length();
+		 if(length<3)
+		 {
+			 return 0;
+		 }
 		 if(length>2&&length<5)
 		 {
 			return 1;
