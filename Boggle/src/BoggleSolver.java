@@ -51,6 +51,10 @@ public class BoggleSolver
 
     public int scoreOf(String word)
     {
+    	if(!save.contains(word))
+    	{
+    		return 0;
+    	}
 		 int length=word.length();
 		 if(length<3)
 		 {
