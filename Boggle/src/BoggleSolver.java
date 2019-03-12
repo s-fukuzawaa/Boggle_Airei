@@ -49,22 +49,83 @@ public class BoggleSolver
     	return save.contains(a);
     }
 
-    private void add(Stack<String> result, char s)
+    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
     {
-    	if(valid(s))
+    	if(!valid(s)||result.contains(s))
     	{
-    		
+    		return result;
     	}
+    	if(valid(s)&&!result.contains(s))
+    	{
+    		result.add(s);
+    	}
+    	
+    	marked[row][col]=true;
+    	if(row==0)
+    	{
+    		if(col==0)
+    		{
+    			if(!marked[row][col+1])
+    			{
+    				String a=b.getLetter(row, col+1)+"";
+    				add( b, result,  s+a, marked, row , col+1);
+    			}
+    			if(!marked[row+1][col+1])
+    			{
+    				String two=b.getLetter(row+1, col+1)+"";
+    				add( b, result,  s+two, marked, row+1 , col+1);
+    			}
+    			if(!marked[row+1][col])
+    			{
+    				String thr=b.getLetter(row+1, col)+"";
+    				add( b, result,  s+thr,marked, row+1 , col+1);
+
+    			}
+    			
+    		}
+    		else
+    		{
+    			if(!marked[row][col+1])
+    			{
+    				String a=b.getLetter(row, col+1)+"";
+    				add(b, result, s+a, marked,row ,col+1);
+    			}
+    			if(!marked[row+1][col+1])
+    			{
+    				String two=b.getLetter(row+1, col+1)+"";
+    				add( b, result, s+two, marked,row+1 , col+1);
+    			}
+    			if(!marked[row+1][col])
+    			{
+    				String thr=b.getLetter(row+1, col)+"";
+    				add( b, result, s+thr, marked, row+1 , col+1);
+
+    			}
+    			if(!marked[row+1][col-1])
+    			{
+    				String f=b.getLetter(row+1, col-1)+"";
+    				add( b, result, s+f,marked, row+1 , col-1);
+
+    			}
+    		}
+    	}
+    	
+    	
+    	
+    	return result;
+    	
     }
+    	
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
-       Stack<String> result= new Stack<String>();
+       ArrayList<String> result= new ArrayList<String>();
+       boolean[][] marked= new boolean[board.rows()][board.cols()];
        
        for(int i=0; i<board.rows(); i++)
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
-    		   add(result,board.getLetter(i, j));
+    		   result=add(board,result,board.getLetter(i, j)+"",new boolean[board.rows()][board.cols()], i ,j);
     	   }
        }
        return result;
