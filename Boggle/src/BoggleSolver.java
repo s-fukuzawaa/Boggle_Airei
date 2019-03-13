@@ -78,38 +78,155 @@ public class BoggleSolver
     			if(!marked[row+1][col])
     			{
     				String thr=b.getLetter(row+1, col)+"";
-    				add( b, result,  s+thr,marked, row+1 , col+1);
+    				add( b, result,  s+thr,marked, row+1 , col);
 
     			}
     			
     		}
-    		else
+    		else if(col==b.cols()-1)
+    		{
+    			if(!marked[row][col-1])
+    			{
+    				String a=b.getLetter(row, col-1)+"";
+    				add(b, result, s+a, marked, row, col-1);
+    			}
+    			if(!marked[row+1][col])
+    			{
+    				String two=b.getLetter(row+1, col)+"";
+    				add(b, result, s+two, marked, row+1, col);
+    			}
+    			if(!marked[row+1][col-1])
+    			{
+    				String thr=b.getLetter(row+1, col-1)+"";
+    				add( b, result,  s+thr,marked, row+1 , col-1);
+    			}
+    		}
+    		
+    	}
+    	else if(row==b.rows()-1)
+    	{
+    		if(col==0)
     		{
     			if(!marked[row][col+1])
     			{
     				String a=b.getLetter(row, col+1)+"";
-    				add(b, result, s+a, marked,row ,col+1);
+    				add( b, result,  s+a, marked, row , col+1);
     			}
-    			if(!marked[row+1][col+1])
+    			if(!marked[row-1][col+1])
     			{
-    				String two=b.getLetter(row+1, col+1)+"";
-    				add( b, result, s+two, marked,row+1 , col+1);
+    				String two=b.getLetter(row-1, col+1)+"";
+    				add( b, result,  s+two, marked, row-1 , col+1);
     			}
-    			if(!marked[row+1][col])
+    			if(!marked[row-1][col])
     			{
-    				String thr=b.getLetter(row+1, col)+"";
-    				add( b, result, s+thr, marked, row+1 , col+1);
+    				String thr=b.getLetter(row-1, col)+"";
+    				add( b, result,  s+thr,marked, row-1 , col);
 
     			}
-    			if(!marked[row+1][col-1])
+    			
+    		}
+    		else if(col==b.cols()-1)
+    		{
+    			if(!marked[row][col-1])
     			{
-    				String f=b.getLetter(row+1, col-1)+"";
-    				add( b, result, s+f,marked, row+1 , col-1);
-
+    				String a=b.getLetter(row, col-1)+"";
+    				add(b, result, s+a, marked, row, col-1);
+    			}
+    			if(!marked[row-1][col])
+    			{
+    				String two=b.getLetter(row-1, col)+"";
+    				add(b, result, s+two, marked, row-1, col);
+    			}
+    			if(!marked[row-1][col-1])
+    			{
+    				String thr=b.getLetter(row-1, col-1)+"";
+    				add( b, result,  s+thr,marked, row-1 , col-1);
     			}
     		}
+    		
     	}
-    	
+    	else if(col==0)
+    	{
+    		if(!marked[row][col+1])
+			{
+				String a=b.getLetter(row, col+1)+"";
+				add( b, result,  s+a, marked, row , col+1);
+			}
+			if(!marked[row+1][col+1])
+			{
+				String two=b.getLetter(row+1, col+1)+"";
+				add( b, result,  s+two, marked, row+1 , col+1);
+			}
+			if(!marked[row+1][col])
+			{
+				String thr=b.getLetter(row+1, col)+"";
+				add( b, result,  s+thr,marked, row+1 , col);
+
+			}
+			if(!marked[row+1][col+1])
+			{
+				String f=b.getLetter(row+1, col+1)+"";
+				add( b, result,  s+f,marked, row+1 , col+1);
+			}
+			if(!marked[row+1][col])
+			{
+				String fi=b.getLetter(row+1, col)+"";
+				add( b, result,  s+fi,marked, row+1 , col);
+			}
+    	}
+    	else if(col==b.cols()-1)
+    	{
+			if(!marked[row+1][col])
+			{
+				String two=b.getLetter(row+1, col)+"";
+				add(b, result, s+two, marked, row+1, col);
+			}
+			if(!marked[row+1][col-1])
+			{
+				String thr=b.getLetter(row+1, col-1)+"";
+				add( b, result,  s+thr,marked, row+1 , col-1);
+			}
+			if(!marked[row][col-1])
+			{
+				String a=b.getLetter(row, col-1)+"";
+				add(b, result, s+a, marked, row, col-1);
+			}
+			if(!marked[row-1][col])
+			{
+				String two=b.getLetter(row-1, col)+"";
+				add(b, result, s+two, marked, row-1, col);
+			}
+			if(!marked[row-1][col-1])
+			{
+				String thr=b.getLetter(row-1, col-1)+"";
+				add( b, result,  s+thr,marked, row-1 , col-1);
+			}
+    	}
+    	else
+		{
+			if(!marked[row][col+1])
+			{
+				String a=b.getLetter(row, col+1)+"";
+				add(b, result, s+a, marked,row ,col+1);
+			}
+			if(!marked[row+1][col+1])
+			{
+				String two=b.getLetter(row+1, col+1)+"";
+				add( b, result, s+two, marked,row+1 , col+1);
+			}
+			if(!marked[row+1][col])
+			{
+				String thr=b.getLetter(row+1, col)+"";
+				add( b, result, s+thr, marked, row+1 , col);
+
+			}
+			if(!marked[row+1][col-1])
+			{
+				String f=b.getLetter(row+1, col-1)+"";
+				add( b, result, s+f,marked, row+1 , col-1);
+
+			}
+		}
     	
     	
     	return result;
@@ -119,12 +236,20 @@ public class BoggleSolver
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
        ArrayList<String> result= new ArrayList<String>();
-       boolean[][] marked= new boolean[board.rows()][board.cols()];
        
        for(int i=0; i<board.rows(); i++)
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
+    		   boolean[][] a=new boolean[board.rows()][board.cols()];
+    		   
+    		   for(int k=0; k<board.rows(); k++)
+    		   {
+    			   for(int m=0; m<board.cols(); m++)
+    			   {
+    				   a[k][m]=false;
+    			   }
+    		   }
     		   result=add(board,result,board.getLetter(i, j)+"",new boolean[board.rows()][board.cols()], i ,j);
     	   }
        }
