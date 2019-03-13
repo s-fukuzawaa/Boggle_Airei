@@ -61,174 +61,123 @@ public class BoggleSolver
     	}
     	
     	marked[row][col]=true;
-    	if(row==0)
+    	
+    	String help="";
+    	//4 corners
+    	if(row==0&&col==0)
     	{
-    		if(col==0)
+    		if(!marked[row+1][col])
     		{
-    			if(!marked[row][col+1])
-    			{
-    				String a=b.getLetter(row, col+1)+"";
-    				add( b, result,  s+a, marked, row , col+1);
-    			}
-    			if(!marked[row+1][col+1])
-    			{
-    				String two=b.getLetter(row+1, col+1)+"";
-    				add( b, result,  s+two, marked, row+1 , col+1);
-    			}
-    			if(!marked[row+1][col])
-    			{
-    				String thr=b.getLetter(row+1, col)+"";
-    				add( b, result,  s+thr,marked, row+1 , col);
-
-    			}
+    			add(b, result, s+""+b.getLetter(row+1, col))
+    		}
     			
-    		}
-    		else if(col==b.cols()-1)
-    		{
-    			if(!marked[row][col-1])
-    			{
-    				String a=b.getLetter(row, col-1)+"";
-    				add(b, result, s+a, marked, row, col-1);
-    			}
-    			if(!marked[row+1][col])
-    			{
-    				String two=b.getLetter(row+1, col)+"";
-    				add(b, result, s+two, marked, row+1, col);
-    			}
-    			if(!marked[row+1][col-1])
-    			{
-    				String thr=b.getLetter(row+1, col-1)+"";
-    				add( b, result,  s+thr,marked, row+1 , col-1);
-    			}
-    		}
-    		
+    		if(!marked[row+1][col+1])
+    			
+    		if(!marked[row][col+1])
     	}
+    	else if(row==0&&col==b.cols()-1)
+    	{
+    		if(!marked[row][col-1])
+    			
+    		if(!marked[row+1][col])
+    			
+    		if(!marked[row+1][col-1])
+    	}
+    	else if(row==b.rows()-1&&col==0)
+    	{
+    		if(!marked[row][col+1])
+    			
+    		if(!marked[row-1][col])
+    		
+    	    if(!marked[row-1][col+1])
+    	}
+    	else if(row==b.rows()-1&&col==b.cols()-1)
+    	{
+    		if(!marked[row][col-1])
+    		
+        	if(!marked[row-1][col-1])
+        		
+        	if(!marked[row-1][col])
+
+    	}
+    		
+    	//4 edges
+    	
+    	else if(row==0)
+    	{
+    		if(!marked[row+1][col])
+    			
+        	if(!marked[row+1][col+1])
+        			
+        	if(!marked[row][col+1])
+        	
+        	if(!marked[row][col-1])
+        			            			
+            if(!marked[row+1][col-1])
+    	}
+    	
     	else if(row==b.rows()-1)
     	{
-    		if(col==0)
-    		{
-    			if(!marked[row][col+1])
-    			{
-    				String a=b.getLetter(row, col+1)+"";
-    				add( b, result,  s+a, marked, row , col+1);
-    			}
-    			if(!marked[row-1][col+1])
-    			{
-    				String two=b.getLetter(row-1, col+1)+"";
-    				add( b, result,  s+two, marked, row-1 , col+1);
-    			}
-    			if(!marked[row-1][col])
-    			{
-    				String thr=b.getLetter(row-1, col)+"";
-    				add( b, result,  s+thr,marked, row-1 , col);
-
-    			}
+    		if(!marked[row][col+1])
     			
-    		}
-    		else if(col==b.cols()-1)
-    		{
-    			if(!marked[row][col-1])
-    			{
-    				String a=b.getLetter(row, col-1)+"";
-    				add(b, result, s+a, marked, row, col-1);
-    			}
-    			if(!marked[row-1][col])
-    			{
-    				String two=b.getLetter(row-1, col)+"";
-    				add(b, result, s+two, marked, row-1, col);
-    			}
-    			if(!marked[row-1][col-1])
-    			{
-    				String thr=b.getLetter(row-1, col-1)+"";
-    				add( b, result,  s+thr,marked, row-1 , col-1);
-    			}
-    		}
-    		
+        	if(!marked[row-1][col])
+        		
+        	if(!marked[row-1][col+1])
+        		
+        	if(!marked[row][col-1])
+            		
+            if(!marked[row-1][col-1])
+                		
     	}
+    	
     	else if(col==0)
     	{
     		if(!marked[row][col+1])
-			{
-				String a=b.getLetter(row, col+1)+"";
-				add( b, result,  s+a, marked, row , col+1);
-			}
-			if(!marked[row+1][col+1])
-			{
-				String two=b.getLetter(row+1, col+1)+"";
-				add( b, result,  s+two, marked, row+1 , col+1);
-			}
-			if(!marked[row+1][col])
-			{
-				String thr=b.getLetter(row+1, col)+"";
-				add( b, result,  s+thr,marked, row+1 , col);
-
-			}
-			if(!marked[row+1][col+1])
-			{
-				String f=b.getLetter(row+1, col+1)+"";
-				add( b, result,  s+f,marked, row+1 , col+1);
-			}
-			if(!marked[row+1][col])
-			{
-				String fi=b.getLetter(row+1, col)+"";
-				add( b, result,  s+fi,marked, row+1 , col);
-			}
+    			
+        	if(!marked[row-1][col])
+        		
+        	if(!marked[row-1][col+1])
+        		
+        	if(!marked[row+1][col])
+        			
+            if(!marked[row+1][col+1])
     	}
+    	
     	else if(col==b.cols()-1)
     	{
-			if(!marked[row+1][col])
-			{
-				String two=b.getLetter(row+1, col)+"";
-				add(b, result, s+two, marked, row+1, col);
-			}
-			if(!marked[row+1][col-1])
-			{
-				String thr=b.getLetter(row+1, col-1)+"";
-				add( b, result,  s+thr,marked, row+1 , col-1);
-			}
-			if(!marked[row][col-1])
-			{
-				String a=b.getLetter(row, col-1)+"";
-				add(b, result, s+a, marked, row, col-1);
-			}
-			if(!marked[row-1][col])
-			{
-				String two=b.getLetter(row-1, col)+"";
-				add(b, result, s+two, marked, row-1, col);
-			}
-			if(!marked[row-1][col-1])
-			{
-				String thr=b.getLetter(row-1, col-1)+"";
-				add( b, result,  s+thr,marked, row-1 , col-1);
-			}
+    		if(!marked[row][col-1])
+        		
+            if(!marked[row-1][col-1])
+            		
+            if(!marked[row-1][col])
+            	
+            if(!marked[row+1][col])
+        			
+            if(!marked[row+1][col-1])
     	}
-    	else
-		{
-			if(!marked[row][col+1])
-			{
-				String a=b.getLetter(row, col+1)+"";
-				add(b, result, s+a, marked,row ,col+1);
-			}
-			if(!marked[row+1][col+1])
-			{
-				String two=b.getLetter(row+1, col+1)+"";
-				add( b, result, s+two, marked,row+1 , col+1);
-			}
-			if(!marked[row+1][col])
-			{
-				String thr=b.getLetter(row+1, col)+"";
-				add( b, result, s+thr, marked, row+1 , col);
-
-			}
-			if(!marked[row+1][col-1])
-			{
-				String f=b.getLetter(row+1, col-1)+"";
-				add( b, result, s+f,marked, row+1 , col-1);
-
-			}
-		}
     	
+    	//in the middle
     	
+    	else 
+    	{
+    		if(!marked[row-1][col-1])
+    			
+        	if(!marked[row-1][col])
+
+            if(!marked[row-1][col+1])
+
+            if(!marked[row][col+1])
+            
+            if(!marked[row][col-1])
+            	
+            if(!marked[row+1][col-1])
+
+            if(!marked[row+1][col])
+                    
+            if(!marked[row+1][col+1])
+
+
+    	}
     	return result;
     	
     }
