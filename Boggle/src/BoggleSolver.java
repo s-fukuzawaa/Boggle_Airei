@@ -46,7 +46,7 @@ public class BoggleSolver
     
     private boolean valid(String a)
     {
-    	return save.contains(a);
+    	return save.get(a)!=null;
     }
 
     private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
