@@ -68,36 +68,69 @@ public class BoggleSolver
     	{
     		if(!marked[row+1][col])
     		{
-    			add(b, result, s+""+b.getLetter(row+1, col))
+    			add(b, result, s+""+b.getLetter(row+1, col), marked,row+1, col);
     		}
     			
     		if(!marked[row+1][col+1])
+    		{
+    			add(b, result, s+""+b.getLetter(row+1, col+1), marked,row+1, col+1);
+    		}
     			
     		if(!marked[row][col+1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+    		}
     	}
     	else if(row==0&&col==b.cols()-1)
     	{
     		if(!marked[row][col-1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+    		}
     			
     		if(!marked[row+1][col])
+    		{
+    			add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
+    		}
     			
     		if(!marked[row+1][col-1])
+    		{
+    			add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
+    		}
     	}
     	else if(row==b.rows()-1&&col==0)
     	{
     		if(!marked[row][col+1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+    		}
     			
     		if(!marked[row-1][col])
+    		{
+    			add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+    		}
     		
     	    if(!marked[row-1][col+1])
+    	    {
+    	    	add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
+    	    }
     	}
     	else if(row==b.rows()-1&&col==b.cols()-1)
     	{
     		if(!marked[row][col-1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+    		}
     		
         	if(!marked[row-1][col-1])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
+        	}
         		
         	if(!marked[row-1][col])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+        	}
 
     	}
     		
@@ -106,54 +139,114 @@ public class BoggleSolver
     	else if(row==0)
     	{
     		if(!marked[row+1][col])
+    		{
+    			add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
+    		}
     			
         	if(!marked[row+1][col+1])
+        	{
+        		add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
+        	}
         			
         	if(!marked[row][col+1])
-        	
+        	{
+        		add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+        	}
         	if(!marked[row][col-1])
+        	{
+        		add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+        	}
         			            			
             if(!marked[row+1][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
+            }
     	}
     	
     	else if(row==b.rows()-1)
     	{
     		if(!marked[row][col+1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+    		}
     			
         	if(!marked[row-1][col])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+        	}
         		
         	if(!marked[row-1][col+1])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
+        	}
         		
         	if(!marked[row][col-1])
+        	{
+        		add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+        	}
             		
             if(!marked[row-1][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
+            }
                 		
     	}
     	
     	else if(col==0)
     	{
     		if(!marked[row][col+1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+    		}
     			
         	if(!marked[row-1][col])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+        	}
         		
         	if(!marked[row-1][col+1])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
+        	}
         		
         	if(!marked[row+1][col])
+        	{
+        		add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
+        	}
         			
             if(!marked[row+1][col+1])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
+            }
     	}
+    
     	
     	else if(col==b.cols()-1)
     	{
     		if(!marked[row][col-1])
+    		{
+    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+    		}
         		
             if(!marked[row-1][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
+            }
             		
             if(!marked[row-1][col])
+            {
+            	add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+            }
             	
             if(!marked[row+1][col])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
+            }
         			
             if(!marked[row+1][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
+            }
     	}
     	
     	//in the middle
@@ -161,20 +254,44 @@ public class BoggleSolver
     	else 
     	{
     		if(!marked[row-1][col-1])
+    		{
+    			add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
+    		}
     			
         	if(!marked[row-1][col])
+        	{
+        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
+        	}
 
             if(!marked[row-1][col+1])
+            {
+            	add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
+            }
 
             if(!marked[row][col+1])
+            {
+            	add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
+            }
             
             if(!marked[row][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
+            }
             	
             if(!marked[row+1][col-1])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
+            }
 
             if(!marked[row+1][col])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
+            }
                     
             if(!marked[row+1][col+1])
+            {
+            	add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
+            }
 
 
     	}
