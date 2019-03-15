@@ -46,6 +46,10 @@ public class BoggleSolver
     
     private boolean valid(String a)
     {
+    	if(!save.contains(a))
+    	{
+    		return false;
+    	}
     	return save.get(a)==1||save.get(a)==2||save.get(a)==5||save.get(a)==11||save.get(a)==0||save.get(a)==3;
     	
     }
