@@ -54,7 +54,7 @@ public class BoggleSolver
     	
     }
 
-    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
+    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,int row ,int col)
     {
     	if(!valid(s)||result.contains(s))
     	{
@@ -65,76 +65,39 @@ public class BoggleSolver
     		result.add(s);
     	}
     	
-    	marked[row][col]=true;
     	
     	//4 corners
     	if(row==0&&col==0)
     	{
-    		if(!marked[row+1][col])
-    		{
-    			add(b, result, s+""+b.getLetter(row+1, col), marked,row+1, col);
-    		}
+    		add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
     			
-    		if(!marked[row+1][col+1])
-    		{
-    			add(b, result, s+""+b.getLetter(row+1, col+1), marked,row+1, col+1);
-    		}
+    		add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
+    		
     			
-    		if(!marked[row][col+1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-    		}
+    		add(b, result, s+""+b.getLetter(row, col+1),  row, col+1);
+    		
     	}
     	else if(row==0&&col==b.cols()-1)
     	{
-    		if(!marked[row][col-1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-    		}
+    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
     			
-    		if(!marked[row+1][col])
-    		{
-    			add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
-    		}
-    			
-    		if(!marked[row+1][col-1])
-    		{
-    			add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
-    		}
+    		add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
+    		add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
+    		
     	}
     	else if(row==b.rows()-1&&col==0)
     	{
-    		if(!marked[row][col+1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-    		}
-    			
-    		if(!marked[row-1][col])
-    		{
-    			add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-    		}
-    		
-    	    if(!marked[row-1][col+1])
-    	    {
-    	    	add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
-    	    }
+    		add(b, result, s+""+b.getLetter(row, col+1),  row, col+1);
+    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+    		add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
+    	    
     	}
     	else if(row==b.rows()-1&&col==b.cols()-1)
     	{
-    		if(!marked[row][col-1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-    		}
-    		
-        	if(!marked[row-1][col-1])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
-        	}
-        		
-        	if(!marked[row-1][col])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-        	}
+    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
+    		add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
+        	add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+        	
 
     	}
     		
@@ -142,160 +105,61 @@ public class BoggleSolver
     	
     	else if(row==0)
     	{
-    		if(!marked[row+1][col])
-    		{
-    			add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
-    		}
-    			
-        	if(!marked[row+1][col+1])
-        	{
-        		add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
-        	}
-        			
-        	if(!marked[row][col+1])
-        	{
-        		add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-        	}
-        	if(!marked[row][col-1])
-        	{
-        		add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-        	}
-        			            			
-            if(!marked[row+1][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
-            }
+    		add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
+    		add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
+        	add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
+        	add(b, result, s+""+b.getLetter(row, col-1), row, col-1);
+        	add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
+            
     	}
     	
     	else if(row==b.rows()-1)
     	{
-    		if(!marked[row][col+1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-    		}
-    			
-        	if(!marked[row-1][col])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-        	}
-        		
-        	if(!marked[row-1][col+1])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
-        	}
-        		
-        	if(!marked[row][col-1])
-        	{
-        		add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-        	}
-            		
-            if(!marked[row-1][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
-            }
+    		add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
+    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+        	add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
+        	add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
+        	add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
+            
                 		
     	}
     	
     	else if(col==0)
     	{
-    		if(!marked[row][col+1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-    		}
-    			
-        	if(!marked[row-1][col])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-        	}
-        		
-        	if(!marked[row-1][col+1])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
-        	}
-        		
-        	if(!marked[row+1][col])
-        	{
-        		add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
-        	}
-        			
-            if(!marked[row+1][col+1])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
-            }
+    		add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
+    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+        	add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
+        	add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
+        	add(b, result, s+""+b.getLetter(row+1, col+1),  row+1, col+1);
+            
     	}
     
     	
     	else if(col==b.cols()-1)
     	{
-    		if(!marked[row][col-1])
-    		{
-    			add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-    		}
-        		
-            if(!marked[row-1][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
-            }
-            		
-            if(!marked[row-1][col])
-            {
-            	add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-            }
-            	
-            if(!marked[row+1][col])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
-            }
-        			
-            if(!marked[row+1][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
-            }
+    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
+    		add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
+            add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+            add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
+            add(b, result, s+""+b.getLetter(row+1, col-1),  row+1, col-1);
+            
     	}
     	
     	//in the middle
     	
     	else 
     	{
-    		if(!marked[row-1][col-1])
-    		{
-    			add(b, result, s+""+b.getLetter(row-1, col-1), marked, row-1, col-1);
-    		}
+    		add(b, result, s+""+b.getLetter(row-1, col-1), row-1, col-1);
+    		
     			
-        	if(!marked[row-1][col])
-        	{
-        		add(b, result, s+""+b.getLetter(row-1, col), marked, row-1, col);
-        	}
-
-            if(!marked[row-1][col+1])
-            {
-            	add(b, result, s+""+b.getLetter(row-1, col+1), marked, row-1, col+1);
-            }
-
-            if(!marked[row][col+1])
-            {
-            	add(b, result, s+""+b.getLetter(row, col+1), marked, row, col+1);
-            }
+        	add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
+        	add(b, result, s+""+b.getLetter(row-1, col+1), row-1, col+1);
+            add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
+            add(b, result, s+""+b.getLetter(row, col-1), row, col-1);
+            add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
+            add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
+            add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
             
-            if(!marked[row][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row, col-1), marked, row, col-1);
-            }
-            	
-            if(!marked[row+1][col-1])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col-1), marked, row+1, col-1);
-            }
-
-            if(!marked[row+1][col])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col), marked, row+1, col);
-            }
-                    
-            if(!marked[row+1][col+1])
-            {
-            	add(b, result, s+""+b.getLetter(row+1, col+1), marked, row+1, col+1);
-            }
 
 
     	}
@@ -311,16 +175,8 @@ public class BoggleSolver
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
-    		   boolean[][] a=new boolean[board.rows()][board.cols()];
     		   
-    		   for(int k=0; k<board.rows(); k++)
-    		   {
-    			   for(int m=0; m<board.cols(); m++)
-    			   {
-    				   a[k][m]=false;
-    			   }
-    		   }
-    		   result=add(board,result,board.getLetter(i, j)+"",new boolean[board.rows()][board.cols()], i ,j);
+    		   result=add(board,result,board.getLetter(i, j)+"",  i ,j);
     	   }
        }
        return result;
