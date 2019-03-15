@@ -46,7 +46,8 @@ public class BoggleSolver
     
     private boolean valid(String a)
     {
-    	return save.get(a)!=null;
+    	return save.get(a)==1||save.get(a)==2||save.get(a)==5||save.get(a)==11||save.get(a)==0||save.get(a)==3;
+    	
     }
 
     private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
@@ -62,7 +63,6 @@ public class BoggleSolver
     	
     	marked[row][col]=true;
     	
-    	String help="";
     	//4 corners
     	if(row==0&&col==0)
     	{
@@ -423,7 +423,7 @@ public class BoggleSolver
         // Use the second one to test against all the boards at once. 
         
         // Example 1: Run with a single board
-        mainWithOneBoardFile(solver, "testinput/board-4x4.txt");
+        mainWithOneBoardFile(solver, "testinput/board-3x3.txt");
         
         // Example 2: Run with ALL boards.  If you use this, you should only use
         // dictionary-common.txt as your dictionary (above), as this will
