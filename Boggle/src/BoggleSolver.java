@@ -54,8 +54,13 @@ public class BoggleSolver
     	
     }
 
-    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,int row ,int col)
+    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
     {
+    	if(row<0||col<0||row>b.rows()-1||col>b.cols()-1||marked[row][col]==true)
+    	{
+    		return result;
+    	}
+    	s=s+b.getLetter(row, col);
     	if(!valid(s)||result.contains(s))
     	{
     		return result;
@@ -63,106 +68,20 @@ public class BoggleSolver
     	if(valid(s)&&!result.contains(s))
     	{
     		result.add(s);
+
     	}
-    	
+
+    	for(int i=row-1; i<=row+1; i++)
+    	{
+    		for(int j=col-1; j<=col+1; j++)
+    		{
+    			add(b, result,s,marked,i ,j);
+    		}
+    	}
+    	marked[row][col]=true;
     	
     	//4 corners
-    	if(row==0&&col==0)
-    	{
-    		add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
-    			
-    		add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
-    		
-    			
-    		add(b, result, s+""+b.getLetter(row, col+1),  row, col+1);
-    		
-    	}
-    	else if(row==0&&col==b.cols()-1)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
-    			
-    		add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
-    		add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
-    		
-    	}
-    	else if(row==b.rows()-1&&col==0)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col+1),  row, col+1);
-    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-    		add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
-    	    
-    	}
-    	else if(row==b.rows()-1&&col==b.cols()-1)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
-    		add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
-        	add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-        	
-
-    	}
-    		
-    	//4 edges
     	
-    	else if(row==0)
-    	{
-    		add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
-    		add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
-        	add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
-        	add(b, result, s+""+b.getLetter(row, col-1), row, col-1);
-        	add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
-            
-    	}
-    	
-    	else if(row==b.rows()-1)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
-    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-        	add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
-        	add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
-        	add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
-            
-                		
-    	}
-    	
-    	else if(col==0)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
-    		add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-        	add(b, result, s+""+b.getLetter(row-1, col+1),  row-1, col+1);
-        	add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
-        	add(b, result, s+""+b.getLetter(row+1, col+1),  row+1, col+1);
-            
-    	}
-    
-    	
-    	else if(col==b.cols()-1)
-    	{
-    		add(b, result, s+""+b.getLetter(row, col-1),  row, col-1);
-    		add(b, result, s+""+b.getLetter(row-1, col-1),  row-1, col-1);
-            add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-            add(b, result, s+""+b.getLetter(row+1, col),  row+1, col);
-            add(b, result, s+""+b.getLetter(row+1, col-1),  row+1, col-1);
-            
-    	}
-    	
-    	//in the middle
-    	
-    	else 
-    	{
-    		add(b, result, s+""+b.getLetter(row-1, col-1), row-1, col-1);
-    		
-    			
-        	add(b, result, s+""+b.getLetter(row-1, col),  row-1, col);
-        	add(b, result, s+""+b.getLetter(row-1, col+1), row-1, col+1);
-            add(b, result, s+""+b.getLetter(row, col+1), row, col+1);
-            add(b, result, s+""+b.getLetter(row, col-1), row, col-1);
-            add(b, result, s+""+b.getLetter(row+1, col-1), row+1, col-1);
-            add(b, result, s+""+b.getLetter(row+1, col),row+1, col);
-            add(b, result, s+""+b.getLetter(row+1, col+1), row+1, col+1);
-            
-
-
-    	}
     	return result;
     	
     }
@@ -176,7 +95,7 @@ public class BoggleSolver
     	   for(int j=0; j<board.cols(); j++)
     	   {
     		   
-    		   result=add(board,result,board.getLetter(i, j)+"",  i ,j);
+    		   result=add(board,result,"",new boolean[board.rows()][board.cols()], i ,j);
     	   }
        }
        return result;
