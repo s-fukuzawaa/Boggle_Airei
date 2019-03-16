@@ -46,26 +46,22 @@ public class BoggleSolver
     
     private boolean valid(String a)
     {
-    	if(!save.contains(a))
-    	{
-    		return false;
-    	}
-    	return save.get(a)==1||save.get(a)==2||save.get(a)==5||save.get(a)==11||save.get(a)==0||save.get(a)==3;
+    	
+    	return save.contains(a);
     	
     }
 
     private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
     {
-    	if(row<0||col<0||row>b.rows()-1||col>b.cols()-1||marked[row][col]==true)
+    	if(marked[row][col]==true)
     	{
     		return result;
     	}
-    	s=s+b.getLetter(row, col);
     	if(!valid(s)||result.contains(s))
     	{
     		return result;
     	}
-    	if(valid(s)&&!result.contains(s))
+    	if(valid(s))
     	{
     		result.add(s);
 
@@ -75,7 +71,11 @@ public class BoggleSolver
     	{
     		for(int j=col-1; j<=col+1; j++)
     		{
-    			add(b, result,s,marked,i ,j);
+    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols())
+    			{
+    				add(b, result,s+b.getLetter(i, j),marked,i ,j);
+    			
+    			}
     		}
     	}
     	marked[row][col]=true;
@@ -95,7 +95,7 @@ public class BoggleSolver
     	   for(int j=0; j<board.cols(); j++)
     	   {
     		   
-    		   result=add(board,result,"",new boolean[board.rows()][board.cols()], i ,j);
+    		   result=add(board,result,board.getLetter(i, j)+"",new boolean[board.rows()][board.cols()], i ,j);
     	   }
        }
        return result;
@@ -107,7 +107,7 @@ public class BoggleSolver
     	{
     		return 0;
     	}
-		 int length=word.length();
+		int length=word.length();
 		 if(length<3)
 		 {
 			 return 0;
