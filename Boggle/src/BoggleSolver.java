@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class BoggleSolver
 {
 	private TrieST<Integer> save;
+	private ArrayList<String> valid;
     public BoggleSolver(String[] dictionary)
     {
     	 this.save= new TrieST<Integer>();
+    	 this.valid= new ArrayList<String>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
     		 int score=0;
@@ -44,61 +46,52 @@ public class BoggleSolver
     	 
     }
     
-    private boolean valid(String a)
+    private boolean check(String a)
     {
     	
-    	return save.contains(a);
+    	return save.contains(a)&&a.length()>=3;
     	
     }
 
-    private ArrayList<String> add(BoggleBoard b,ArrayList<String> result, String s,boolean[][] marked,int row ,int col)
+    private void add(BoggleBoard b, boolean[][] marked, String s,int row ,int col)
     {
-    	if(marked[row][col]==true)
+    	marked[row][col]=true;
+    	
+    	if(check(s))
     	{
-    		return result;
-    	}
-    	if(!valid(s)||result.contains(s))
-    	{
-    		return result;
-    	}
-    	if(valid(s))
-    	{
-    		result.add(s);
+    		valid.add(s);
 
     	}
-
+    	else if(!save.keysWithPrefix(s).iterator().hasNext())
+    	{
+    		marked[row][col]=false;
+    		return;
+    	}
     	for(int i=row-1; i<=row+1; i++)
     	{
     		for(int j=col-1; j<=col+1; j++)
     		{
-    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols())
+    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true)
     			{
-    				add(b, result,s+b.getLetter(i, j),marked,i ,j);
-    			
+    				add(b,marked,s+b.getLetter(i, j),i ,j);
+
     			}
     		}
     	}
-    	marked[row][col]=true;
-    	
-    	//4 corners
-    	
-    	return result;
+    	marked[row][col]=false;
     	
     }
     	
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
-       ArrayList<String> result= new ArrayList<String>();
-       
        for(int i=0; i<board.rows(); i++)
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
-    		   
-    		   result=add(board,result,board.getLetter(i, j)+"",new boolean[board.rows()][board.cols()], i ,j);
+    		   add(board,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j);
     	   }
        }
-       return result;
+       return valid;
     }
 
     public int scoreOf(String word)
