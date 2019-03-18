@@ -57,7 +57,7 @@ public class BoggleSolver
     {
     	marked[row][col]=true;
     	
-    	if(check(s))
+    	if(check(s)&&!valid.contains(s))
     	{
     		valid.add(s);
 
@@ -195,7 +195,7 @@ public class BoggleSolver
         // Use the second one to test against all the boards at once. 
         
         // Example 1: Run with a single board
-        mainWithOneBoardFile(solver, "testinput/board-3x3.txt");
+        mainWithOneBoardFile(solver, "testinput/board-4x4.txt");
         
         // Example 2: Run with ALL boards.  If you use this, you should only use
         // dictionary-common.txt as your dictionary (above), as this will
