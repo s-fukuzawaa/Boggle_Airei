@@ -7,9 +7,12 @@ import java.util.ArrayList;
 public class BoggleSolver
 {
 	private TrieST<Integer> save;
+	private TrieST<Integer> prefix;
+
     public BoggleSolver(String[] dictionary)
     {
     	 this.save= new TrieST<Integer>();
+    	 this.prefix= new TrieST<Integer>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
     		 int score=0;
@@ -38,8 +41,11 @@ public class BoggleSolver
     		 {
     			 score=11;
     		 }
-    		 
     		 save.put(dictionary[i], score);
+    		 for(int k=1; k<=length; k++)
+    		 {
+    			 prefix.put(dictionary[i].substring(0, k), score);
+    		 }
     	 }
     	 
     }
@@ -60,7 +66,7 @@ public class BoggleSolver
     		valid.add(s);
 
     	}
-    	else if(!save.keysWithPrefix(s).iterator().hasNext())
+    	else if(!prefix.contains(s))
     	{
     		marked[row][col]=false;
     		return valid;
