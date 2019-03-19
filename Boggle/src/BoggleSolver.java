@@ -15,36 +15,11 @@ public class BoggleSolver
     	 this.prefix= new TrieST<Integer>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
-    		 int score=0;
-    		 int length=dictionary[i].length();
-    		 if(length<3)
+    		
+    		 save.put(dictionary[i], 0);
+    		 for(int k=1; k<=dictionary[i].length(); k++)
     		 {
-    			 score=0;
-    		 }
-    		 if(length>2&&length<5)
-    		 {
-    			score=1;
-    		 }
-    		 else if(length==5)
-    		 {
-    			 score=2;
-    		 }
-    		 else if(length==6)
-    		 {
-    			 score=3;
-    		 }
-    		 else if(length==7)
-    		 {
-    			 score=5;
-    		 }
-    		 else if(length>7)
-    		 {
-    			 score=11;
-    		 }
-    		 save.put(dictionary[i], score);
-    		 for(int k=1; k<=length; k++)
-    		 {
-    			 prefix.put(dictionary[i].substring(0, k), score);
+    			 prefix.put(dictionary[i].substring(0, k), 0);
     		 }
     	 }
     	 
@@ -52,9 +27,7 @@ public class BoggleSolver
     
     private boolean check(String a)
     {
-    	
     	return save.contains(a)&&a.length()>=3;
-    	
     }
 
     private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col)
