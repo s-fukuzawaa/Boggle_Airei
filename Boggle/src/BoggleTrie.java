@@ -7,7 +7,7 @@ public class BoggleTrie<Value>
 
     private static class Node {
         private Object val;
-        private Node[] next = new Node[R];
+        private Node[] next = new Node[26];
     }
 
    /****************************************************
@@ -27,7 +27,7 @@ public class BoggleTrie<Value>
         if (x == null) return null;
         if (d == key.length()) return x;
         char c = key.charAt(d);
-        return get(x.next[c], key, d+1);
+        return get(x.next[c-65], key, d+1);
     }
 
    /****************************************************
@@ -44,7 +44,7 @@ public class BoggleTrie<Value>
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, val, d+1);
+        x.next[c-65] = put(x.next[c-65], key, val, d+1);
         return x;
     }
 
@@ -61,7 +61,7 @@ public class BoggleTrie<Value>
         if (x.val != null) length = d;
         if (d == query.length()) return length;
         char c = query.charAt(d);
-        return longestPrefixOf(x.next[c], query, d+1, length);
+        return longestPrefixOf(x.next[c-65], query, d+1, length);
     }
 
 
@@ -80,7 +80,7 @@ public class BoggleTrie<Value>
         if (x == null) return;
         if (x.val != null) queue.enqueue(key);
         for (int c = 0; c < R; c++)
-            collect(x.next[c], key + (char) c, queue);
+            collect(x.next[c-65], key + (char) c, queue);
     }
 
 
@@ -97,7 +97,7 @@ public class BoggleTrie<Value>
         char next = pat.charAt(prefix.length());
         for (int c = 0; c < R; c++)
             if (next == '.' || next == c)
-                collect(x.next[c], prefix + (char) c, pat, q);
+                collect(x.next[c-65], prefix + (char) c, pat, q);
     }
 
     public void delete(String key) {
@@ -109,11 +109,11 @@ public class BoggleTrie<Value>
         if (d == key.length()) x.val = null;
         else {
             char c = key.charAt(d);
-            x.next[c] = delete(x.next[c], key, d+1);
+            x.next[c-65] = delete(x.next[c-65], key, d+1);
         }
         if (x.val != null) return x;
         for (int c = 0; c < R; c++)
-            if (x.next[c] != null)
+            if (x.next[c-65] != null)
                 return x;
         return null;
     }
