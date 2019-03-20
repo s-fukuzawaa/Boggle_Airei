@@ -15,23 +15,19 @@ public class BoggleSolver
     	 this.prefix= new BoggleTrie<Integer>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
- 			save.put(dictionary[i], 0);
-
-    		if(dictionary[i].length()>=3)
-    		{ 
-    			 for(int k=1; k<=dictionary[i].length(); k++)
-        		 {
-        			 prefix.put(dictionary[i].substring(0, k), 0);
-        		 }
-    		}
     		
+    		 save.put(dictionary[i], 0);
+    		 for(int k=1; k<=dictionary[i].length(); k++)
+    		 {
+    			 prefix.put(dictionary[i].substring(0, k), 0);
+    		 }
     	 }
     	 
     }
     
     private boolean check(String a)
     {
-    	return save.contains(a);
+    	return save.contains(a)&&a.length()>=3;
     }
 
     private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col)
