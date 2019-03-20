@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class BoggleSolver
 {
-	private TrieST<Integer> save;
-	private TrieST<Integer> prefix;
+	private BoggleTrie<Integer> save;
+	private BoggleTrie<Integer> prefix;
 
     public BoggleSolver(String[] dictionary)
     {
-    	 this.save= new TrieST<Integer>();
-    	 this.prefix= new TrieST<Integer>();
+    	 this.save= new BoggleTrie<Integer>();
+    	 this.prefix= new BoggleTrie<Integer>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
     		
