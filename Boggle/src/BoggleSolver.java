@@ -7,20 +7,15 @@ import java.util.ArrayList;
 public class BoggleSolver
 {
 	private BoggleTrie<Integer> save;
-	private BoggleTrie<Integer> prefix;
 
     public BoggleSolver(String[] dictionary)
     {
     	 this.save= new BoggleTrie<Integer>();
-    	 this.prefix= new BoggleTrie<Integer>();
     	 for(int i=0; i<dictionary.length; i++)
     	 {
     		
     		 save.put(dictionary[i], 0);
-    		 for(int k=1; k<=dictionary[i].length(); k++)
-    		 {
-    			 prefix.put(dictionary[i].substring(0, k), 0);
-    		 }
+    		
     	 }
     	 
     }
@@ -39,7 +34,8 @@ public class BoggleSolver
     		valid.add(s);
 
     	}
-    	else if(!prefix.contains(s))
+    	
+    	else if(!save.contains(s)&&save.get(s)!=null)
     	{
     		marked[row][col]=false;
     		return valid;
@@ -61,7 +57,9 @@ public class BoggleSolver
     	
     public Iterable<String> getAllValidWords(BoggleBoard board)
     {
+    	
     	ArrayList<String> valid= new ArrayList<String>();
+    	
        for(int i=0; i<board.rows(); i++)
        {
     	   for(int j=0; j<board.cols(); j++)
