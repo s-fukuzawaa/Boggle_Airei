@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+
 
 public class BoggleTrie<Value>
 {
@@ -23,6 +26,24 @@ public class BoggleTrie<Value>
         return (Value) x.val;
     }
 
+    public boolean prefix(String s)
+    {
+    	return search(s,root,0);
+    }
+    private boolean search(String prefix, Node a, int sum)
+    {
+    	for(int i=0; i<prefix.length();i++)
+    	{
+    		if(a.next[prefix.charAt(i)-65]==null)
+    		{
+    			return false;
+    		}
+    		a=a.next[prefix.charAt(i)-65];
+    	}
+    	
+    	
+    	return true;
+    }
     private Node get(Node x, String key, int d) {
         if (x == null) return null;
         if (d == key.length()) return x;

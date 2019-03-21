@@ -25,6 +25,7 @@ public class BoggleSolver
     	return save.contains(a)&&a.length()>=3;
     }
 
+    
     private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col)
     {
     	marked[row][col]=true;
@@ -34,12 +35,12 @@ public class BoggleSolver
     		valid.add(s);
 
     	}
-    	
-    	else if(!save.contains(s)&&save.get(s)!=null)
-    	{
+    	else if(!save.prefix(s))
+    	{    
     		marked[row][col]=false;
     		return valid;
     	}
+
     	for(int i=row-1; i<=row+1; i++)
     	{
     		for(int j=col-1; j<=col+1; j++)
