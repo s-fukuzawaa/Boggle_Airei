@@ -7,6 +7,7 @@ public class BoggleTrie<Value>
 	private static final int R = 26;        // extended ASCII
 
     private Node root = new Node();
+    private Node flexible= new Node();
 
     private static class Node {
         private Object val;
@@ -25,7 +26,10 @@ public class BoggleTrie<Value>
         if (x == null) return null;
         return (Value) x.val;
     }
-
+    public boolean exist()
+    {
+    	return root;
+    }
     public boolean prefix(String s)
     {
     	return search(s,root,0);

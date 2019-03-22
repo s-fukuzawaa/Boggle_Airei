@@ -26,7 +26,7 @@ public class BoggleSolver
     }
 
     
-    private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col)
+    private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col, char c )
     {
     	marked[row][col]=true;
     	
@@ -49,11 +49,11 @@ public class BoggleSolver
     			{
     				if((b.getLetter(i, j)+"").equals("Q"))
     				{
-    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j);
+    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,(char)85);
     				}
     				else
     				{
-    					add(b,valid,marked,s+b.getLetter(i, j),i ,j);
+    					add(b,valid,marked,s+b.getLetter(i, j),i ,j,b.getLetter(i, j));
     				}
 
     			}
@@ -74,12 +74,12 @@ public class BoggleSolver
     	   {
     		   if((board.getLetter(i, j)+"").equals("Q"))
     		   {
-        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+""+"U",i,j);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"U",i,j,(char)85);
 
     		   }
     		   else
     		   {
-        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j,board.getLetter(i, j));
     		   }
     	   }
        }
