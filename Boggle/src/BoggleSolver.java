@@ -47,7 +47,14 @@ public class BoggleSolver
     		{
     			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true)
     			{
-    				add(b,valid,marked,s+b.getLetter(i, j),i ,j);
+    				if((b.getLetter(i, j)+"").equals("Q"))
+    				{
+    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j);
+    				}
+    				else
+    				{
+    					add(b,valid,marked,s+b.getLetter(i, j),i ,j);
+    				}
 
     			}
     		}
