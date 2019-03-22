@@ -65,7 +65,15 @@ public class BoggleSolver
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
-    		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j);
+    		   if((board.getLetter(i, j)+"").equals("Q"))
+    		   {
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+""+"U",i,j);
+
+    		   }
+    		   else
+    		   {
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j);
+    		   }
     	   }
        }
        return valid;
