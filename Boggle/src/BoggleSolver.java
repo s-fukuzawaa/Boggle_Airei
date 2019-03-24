@@ -39,16 +39,16 @@ public class BoggleSolver
     		{
         		for(int j=col-1; j<=col+1; j++)
         		{
-        			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true)
+        			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
         			{
         				char tempc=b.getLetter(i, j);
 
-        				if((tempc+"").equals("Q")&&track.next()[tempc-65]!=null)
+        				if((tempc+"").equals("Q"))
         				{
         					
         					add(b,valid,marked,s+tempc+"U",i ,j,track.next()[tempc-65].next()[((char)85)-65]);
         				}
-        				else if(track.next()[tempc-65]!=null)
+        				else
         				{
         					add(b,valid,marked,s+tempc,i ,j,track.next()[tempc-65]);
         				}
