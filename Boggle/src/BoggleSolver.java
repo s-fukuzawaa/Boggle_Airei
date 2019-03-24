@@ -28,32 +28,36 @@ public class BoggleSolver
     	marked[row][col]=true;
     	
     	
-    	if(track.value()!=null&&!valid.contains(s)&&s.length()>=3)
+    	if(track!=null&&track.value()!=null&&!valid.contains(s)&&s.length()>=3)
     	{
     		valid.add(s);
 
     	}
-
-    	for(int i=row-1; i<=row+1; i++)
+    	if(track!=null)
     	{
-    		for(int j=col-1; j<=col+1; j++)
+    		for(int i=row-1; i<=row+1; i++)
     		{
-    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
-    			{
+        		for(int j=col-1; j<=col+1; j++)
+        		{
+        			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
+        			{
 
-    				if((b.getLetter(i, j)+"").equals("Q"))
-    				{
-    					
-    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,track.next()[b.getLetter(i, j)-65].next()[((char)85)-65]);
-    				}
-    				else
-    				{
-    					add(b,valid,marked,s+b.getLetter(i, j),i ,j,track.next()[b.getLetter(i, j)-65]);
-    				}
+        				if((b.getLetter(i, j)+"").equals("Q"))
+        				{
+        					
+        					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,track.next()[b.getLetter(i, j)-65].next()[((char)85)-65]);
+        				}
+        				else
+        				{
+        					add(b,valid,marked,s+b.getLetter(i, j),i ,j,track.next()[b.getLetter(i, j)-65]);
+        				}
 
-    			}
-    		}
+        			}
+        		}
+        	}
     	}
+    		
+    	
     	marked[row][col]=false;
     	return valid;
     }
@@ -171,7 +175,7 @@ public class BoggleSolver
     
     public static void main(String[] args)
     {
-        In in = new In("testinput/dictionary-common.txt");
+        In in = new In("testinput/dictionary-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
         String[] dictionary = in.readAllStrings();
         BoggleSolver solver = new BoggleSolver(dictionary);
         
@@ -183,9 +187,9 @@ public class BoggleSolver
         
         // Example 1: Run with a single board
 
-        mainWithOneBoardFile(solver,"testinput/board-qwerty.txt");
+        mainWithOneBoardFile(solver,"testinput/board-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
 
-        mainWithOneBoardFile(solver, "testinput/board-quinquevalencies.txt");
+        mainWithOneBoardFile(solver, "testinput/board-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
 
         
         // Example 2: Run with ALL boards.  If you use this, you should only use
