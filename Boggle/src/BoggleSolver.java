@@ -39,10 +39,11 @@ public class BoggleSolver
     		{
         		for(int j=col-1; j<=col+1; j++)
         		{
-        			char tempc=b.getLetter(i, j);
         			
-        			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[tempc-65]!=null)
+        			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
         			{
+            			char tempc=b.getLetter(i, j);
+
 
         				if((tempc+"").equals("Q"))
         				{
