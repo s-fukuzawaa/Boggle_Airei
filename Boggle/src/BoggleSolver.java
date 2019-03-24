@@ -21,7 +21,7 @@ public class BoggleSolver
     	 
     }
     
-   
+
     
     private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col, BoggleTrie.Node track)
     {
@@ -44,7 +44,7 @@ public class BoggleSolver
     				if((b.getLetter(i, j)+"").equals("Q"))
     				{
     					
-    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,track.next()[b.getLetter(i, j)-65]);
+    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,track.next()[b.getLetter(i, j)-65].next()[((char)85)-65]);
     				}
     				else
     				{
@@ -69,7 +69,7 @@ public class BoggleSolver
     	   {
     		   if((board.getLetter(i, j)+"").equals("Q"))
     		   {
-        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"U",i,j,track.next()[board.getLetter(i, j)-65]);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"U",i,j,track.next()[board.getLetter(i, j)-65].next()[((char)85)-65]);
 
     		   }
     		   else
@@ -183,9 +183,9 @@ public class BoggleSolver
         
         // Example 1: Run with a single board
 
-        mainWithOneBoardFile(solver,"testinput/board-4x4.txt");
+        mainWithOneBoardFile(solver,"testinput/board-qwerty.txt");
 
-        mainWithOneBoardFile(solver, "testinput/board-points.0.b.txt");
+        mainWithOneBoardFile(solver, "testinput/board-quinquevalencies.txt");
 
         
         // Example 2: Run with ALL boards.  If you use this, you should only use
