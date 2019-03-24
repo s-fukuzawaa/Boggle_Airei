@@ -39,16 +39,14 @@ public class BoggleSolver
     		{
         		for(int j=col-1; j<=col+1; j++)
         		{
-        			
         			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
         			{
-            			char tempc=b.getLetter(i, j);
-
+        				char tempc=b.getLetter(i, j);
 
         				if((tempc+"").equals("Q"))
         				{
         					
-        					add(b,valid,marked,s+tempc,i ,j,track.next()[tempc-65].next()[((char)85)-65]);
+        					add(b,valid,marked,s+tempc+"U",i ,j,track.next()[tempc-65].next()[((char)85)-65]);
         				}
         				else
         				{
@@ -70,21 +68,19 @@ public class BoggleSolver
     	
     	ArrayList<String> valid= new ArrayList<String>();
     	BoggleTrie.Node track= save.root();
-    	int row=board.rows();
-    	int col=board.cols();
-       for(int i=0; i<row; i++)
+       for(int i=0; i<board.rows(); i++)
        {
-    	   for(int j=0; j<col; j++)
+    	   for(int j=0; j<board.cols(); j++)
     	   {
     		   char tempc=board.getLetter(i, j);
     		   if((tempc+"").equals("Q"))
     		   {
-        		   valid=add(board,valid,new boolean[row][col],tempc+"U",i,j,track.next()[tempc-65].next()[((char)85)-65]);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],tempc+"U",i,j,track.next()[tempc-65].next()[((char)85)-65]);
 
     		   }
     		   else
     		   {
-        		   valid=add(board,valid,new boolean[row][col],tempc+"",i,j,track.next()[tempc-65]);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],tempc+"",i,j,track.next()[tempc-65]);
     		   }
     	   }
        }
@@ -181,7 +177,7 @@ public class BoggleSolver
     
     public static void main(String[] args)
     {
-        In in = new In("testinput/dictionary-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
+        In in = new In("testinput/dictionary-common.txt");
         String[] dictionary = in.readAllStrings();
         BoggleSolver solver = new BoggleSolver(dictionary);
         
@@ -193,7 +189,7 @@ public class BoggleSolver
         
         // Example 1: Run with a single board
 
-        mainWithOneBoardFile(solver,"testinput/board-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
+        mainWithOneBoardFile(solver,"testinput/board-inconsequentially.txt");
 
         mainWithOneBoardFile(solver, "testinput/board-pneumonoultramicroscopicsilicovolcanoconiosis.txt");
 
