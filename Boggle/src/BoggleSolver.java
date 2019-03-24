@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+
 public class BoggleSolver
 {
 	private BoggleTrie<Integer> save;
@@ -20,40 +21,34 @@ public class BoggleSolver
     	 
     }
     
-    private boolean check(String a)
-    {
-    	return save.contains(a)&&a.length()>=3;
-    }
-
+   
     
-    private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col, char c )
+    private ArrayList<String> add(BoggleBoard b, ArrayList<String> valid, boolean[][] marked, String s,int row ,int col, BoggleTrie.Node track)
     {
     	marked[row][col]=true;
     	
-    	if(check(s)&&!valid.contains(s))
+    	
+    	if(track.value()!=null&&!valid.contains(s)&&s.length()>=3)
     	{
     		valid.add(s);
 
-    	}
-    	else if(!save.prefix(s))
-    	{    
-    		marked[row][col]=false;
-    		return valid;
     	}
 
     	for(int i=row-1; i<=row+1; i++)
     	{
     		for(int j=col-1; j<=col+1; j++)
     		{
-    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true)
+    			if(i>-1&&j>-1&&i<b.rows()&&j<b.cols()&&marked[i][j]!=true&&track.next()[b.getLetter(i, j)-65]!=null)
     			{
+
     				if((b.getLetter(i, j)+"").equals("Q"))
     				{
-    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,(char)85);
+    					
+    					add(b,valid,marked,s+b.getLetter(i, j)+"U",i ,j,track.next()[b.getLetter(i, j)-65]);
     				}
     				else
     				{
-    					add(b,valid,marked,s+b.getLetter(i, j),i ,j,b.getLetter(i, j));
+    					add(b,valid,marked,s+b.getLetter(i, j),i ,j,track.next()[b.getLetter(i, j)-65]);
     				}
 
     			}
@@ -67,19 +62,19 @@ public class BoggleSolver
     {
     	
     	ArrayList<String> valid= new ArrayList<String>();
-    	
+    	BoggleTrie.Node track= save.root();
        for(int i=0; i<board.rows(); i++)
        {
     	   for(int j=0; j<board.cols(); j++)
     	   {
     		   if((board.getLetter(i, j)+"").equals("Q"))
     		   {
-        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"U",i,j,(char)85);
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"U",i,j,track.next()[board.getLetter(i, j)-65]);
 
     		   }
     		   else
     		   {
-        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j,board.getLetter(i, j));
+        		   valid=add(board,valid,new boolean[board.rows()][board.cols()],board.getLetter(i, j)+"",i,j,track.next()[board.getLetter(i, j)-65]);
     		   }
     	   }
        }

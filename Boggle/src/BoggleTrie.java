@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 
 
@@ -7,11 +6,21 @@ public class BoggleTrie<Value>
 	private static final int R = 26;        // extended ASCII
 
     private Node root = new Node();
-    private Node flexible= new Node();
+    
 
-    private static class Node {
+    public static class Node {
         private Object val;
         private Node[] next = new Node[26];
+       
+        public Node[] next()
+        {
+        	return this.next;
+        }
+        public Object value()
+        {
+        	return val;
+        }
+       
     }
 
    /****************************************************
@@ -20,16 +29,17 @@ public class BoggleTrie<Value>
     public boolean contains(String key) {
         return get(key) != null;
     }
-
+    public Node root()
+    {
+    	return root;
+    }
     public Value get(String key) {
         Node x = get(root, key, 0);
         if (x == null) return null;
         return (Value) x.val;
     }
-    public boolean exist()
-    {
-    	return root;
-    }
+    
+    
     public boolean prefix(String s)
     {
     	return search(s,root,0);
